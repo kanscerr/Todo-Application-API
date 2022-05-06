@@ -9,8 +9,8 @@ router.post('/', (req, res) => {
         task : req.body.task,
         todo : req.body.todo
     });
-    const data = newTask.save()
-    res.send("ADDED TO DATABASE!");
+    newTask.save()
+    res.send(newTask);
 });
 
 //route for deleting a todo
@@ -21,7 +21,7 @@ router.delete('/:task', (req, res) => {
             res.send("Given task does not exist in database!");
         }
         else{
-            res.send("DELETED FROM DATABASE!");
+            res.send(`Deleted: ${result}`);
         }
     })
 })
@@ -62,7 +62,7 @@ router.put('/:task', (req, res) => {
             res.send('No such task available in database!')
         }
         else{
-            res.send("UPDATED IN DATABASE!"); 
+            res.send('UPDATED IN DATABASE!'); 
         }
     })
 })
