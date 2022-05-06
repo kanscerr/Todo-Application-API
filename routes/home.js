@@ -40,8 +40,8 @@ router.get('/', (req, res) => {
 
 //route for getting user defined todo
 router.get('/:task', (req, res) => {
-    const getTask = req.params.task;
-    model.findOne(({task : getTask}), (error, result) => {
+    const taskID = req.params.task;
+    model.findOne(({task : taskID}), (error, result) => {
         if(!result){
             res.send("No such task available in database!");
         }
@@ -53,16 +53,16 @@ router.get('/:task', (req, res) => {
 
 //route for updating any todo
 router.put('/:task', (req, res) => {
-    const updateTask = req.params.task;
+    const taskID = req.params.task;
     model.findOneAndUpdate(
-        {task : updateTask},
+        {task : taskID},
         {task : req.body.task, todo : req.body.todo},
         (error, result) => {
         if(!result){
             res.send('No such task available in database!')
         }
         else{
-            res.send("UPDATED IN DATABASE!"); 
+            res.send(`Task ${taskID} updated to: ${JSON.stringify(req.body)}`)
         }
     })
 })
