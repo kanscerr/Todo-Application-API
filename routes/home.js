@@ -10,7 +10,7 @@ router.post('/', (req, res) => {
         todo : req.body.todo
     });
     newTask.save()
-    res.send(newTask);
+    res.json(newTask);
 });
 
 //route for deleting a todo
@@ -21,7 +21,7 @@ router.delete('/:task', (req, res) => {
             res.send("Given task does not exist in database!");
         }
         else{
-            res.send(`Deleted: ${result}`);
+            res.send(`Deleted: ${JSON.stringify(result)}`);
         }
     })
 })
@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
             res.send("No task available in database!");
         }
         else{
-            res.send(result);
+            res.json(result);
         }
     })
 })
@@ -46,7 +46,7 @@ router.get('/:task', (req, res) => {
             res.send("No such task available in database!");
         }
         else{
-            res.send(result);
+            res.json(result);
         }
     })
 })
@@ -62,7 +62,7 @@ router.put('/:task', (req, res) => {
             res.send('No such task available in database!')
         }
         else{
-            res.send(`Task ${taskID} updated to: ${JSON.stringify(req.body)}`)
+            res.send(`task ${taskID} updated to ${JSON.stringify(req.body)}`);
         }
     })
 })
