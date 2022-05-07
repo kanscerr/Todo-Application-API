@@ -18,4 +18,4 @@ app.use(bodyparser.json());
 app.use('', homeRoute);
 
 //listening on port
-app.listen(PORT, () => console.log(`Listening on http://localhost${PORT}`));
+app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
