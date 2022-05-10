@@ -30,10 +30,11 @@ router.delete('/:task', (req, res) => {
 //route for getting all existing todo
 router.get('/', (req, res) => {
     model.find((error, result) => {
-        if(!result){
+        if(result.length == 0){
             res.send("No task available");
         }
         else{
+            console.log(result)
             let todoString = '';
             model.countDocuments({}).exec((err, result) => {
                 if(err){
@@ -78,8 +79,11 @@ router.put('/:task', (req, res) => {
         if(!result){
             res.send('No such task available!')
         }
+        if(req.body.task && req.body.task != taskID){
+            res.send("Task number cannot be changed. \n"+ "Task " + taskID + " updated- " + req.body.todo)
+        }
         else{
-            res.send("Task " + taskID + " updated- \n" + "Task " + req.body.task + " - " + req.body.todo);
+            res.send("Task " + taskID + " updated- " + req.body.todo);
         }
     })
 })
