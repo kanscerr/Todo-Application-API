@@ -79,8 +79,8 @@ router.put('/:task', (req, res) => {
         if(!result){
             res.send('No such task available!')
         }
-        if(req.body.task && req.body.task != taskID){
-            res.send("Task number cannot be changed. \n"+ "Task " + taskID + " updated- " + req.body.todo)
+        if(req.body.task && req.body.task != taskID){ //for keeping unique task numbers
+            res.send("Task number cannot be changed. \n"+ "Task " + taskID + " updated- " + req.body.todo) //
         }
         else{
             res.send("Task " + taskID + " updated- " + req.body.todo);
