@@ -35,13 +35,13 @@ router.get('/', (req, res) => {
         }
         else{
             console.log(result)
-            let todoString = '';
+            let todoString = ''; //for storing the response string
             model.countDocuments({}).exec((err, result) => {
                 if(err){
                     res.send(err);
                 }
                 else{
-                    const num = result;
+                    const num = result; //for running the loop <num> times to store each todo in <todoString>
                     model.find().sort({task : 1}).exec((error, result) => {
                         if(result){
                             for(i=0; i<num;i++){
