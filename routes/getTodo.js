@@ -29,7 +29,7 @@ router.post('/getTodo/:task', (req, res) => {
     const taskID = req.params.task;
     model.findOne(({task : taskID}), (error, result) => {
         if(!result){
-            res.send("No such task available!");
+            res.json("No such task available!");
         }
         else{
             res.send(result);
