@@ -10,8 +10,13 @@ router.post('/', (req, res) => {
         task : req.body.task,
         todo : req.body.todo
     });
-    newTask.save()
-    res.send(`New task added: ${req.body.todo}`);
+    if(req.body.task && req.body.todo){
+        newTask.save()
+        res.send(newTask);
+    }
+    else{
+        res.send("Error : Fields empty!")
+    }
 });
 
 //route for deleting a todo
@@ -22,49 +27,7 @@ router.delete('/:task', (req, res) => {
             res.send("Given task does not exist!");
         }
         else{
-            res.send(`You deleted task ${req.params.task} : ${result.todo}`);
-        }
-    })
-})
-
-//route for getting all existing todo
-router.get('/', (req, res) => {
-    model.find((error, result) => {
-        if(result.length == 0){
-            res.send("No task available");
-        }
-        else{
-            console.log(result)
-            let todoString = ''; //for storing the response string
-            model.countDocuments({}).exec((err, result) => {
-                if(err){
-                    res.send(err);
-                }
-                else{
-                    const num = result; //for running the loop <num> times to store each todo in <todoString>
-                    model.find().sort({task : 1}).exec((error, result) => {
-                        if(result){
-                            for(i=0; i<num;i++){
-                                todoString += "Task " + result[i].task + " - " + result[i].todo + "\n"
-                            }
-                            res.send(todoString);
-                        }
-                    });
-                }
-            })
-        }
-    })
-})
-
-//route for getting user defined todo
-router.get('/:task', (req, res) => {
-    const taskID = req.params.task;
-    model.findOne(({task : taskID}), (error, result) => {
-        if(!result){
-            res.send("No such task available!");
-        }
-        else{
-            res.send(`Task ${taskID} - ${result.todo}`);
+            res.send(result);
         }
     })
 })
@@ -74,16 +37,16 @@ router.put('/:task', (req, res) => {
     const taskID = req.params.task;
     model.findOneAndUpdate(
         {task : taskID},
-        {todo : req.body.todo},
+        update = {task : taskID, todo : req.body.todo},
         (error, result) => {
         if(!result){
             res.send('No such task available!')
         }
         if(req.body.task && req.body.task != taskID){ //for keeping unique task numbers
-            res.send("Task number cannot be changed. \n"+ "Task " + taskID + " updated- " + req.body.todo) //
+            res.send({message : "Task number cannot be changed" + result});
         }
         else{
-            res.send("Task " + taskID + " updated- " + req.body.todo);
+            res.send(update);
         }
     })
 })

@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const model = require('./schema');
 const homeRoute = require('./routes/home')
+const getTodoRoute = require('./routes/getTodo')
 
 //connecting with mongodb compass locally
 mongoose.connect("mongodb://localhost/todolist", {useNewUrlParser: true}, () => console.log('Connected with database!'))
@@ -16,6 +17,7 @@ app.use(bodyparser.json());
 
 //connecting with routes
 app.use('', homeRoute);
+app.use('/', getTodoRoute)
 
 //listening on port
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
