@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
         res.send(newTask);
     }
     else{
-        res.send({Error : "Fields empty!"})
+        res.json({Error : "Fields empty!"})
     }
 });
 
@@ -24,7 +24,7 @@ router.delete('/:task', (req, res) => {
     const deleteId = req.params.task;
     model.findOneAndDelete({task : deleteId}, (error, result) => {
         if(!result){
-            res.json("Given task does not exist!");
+            res.json({Error : "Given task does not exist!"});
         }
         else{
             res.send(result);
@@ -40,10 +40,10 @@ router.put('/:task', (req, res) => {
         update = {task : taskID, todo : req.body.todo},
         (error, result) => {
         if(!result){
-            res.json('No such task available!')
+            res.json({Error : 'No such task available!'})
         }
         if(req.body.task && req.body.task != taskID){ //for keeping unique task numbers
-            res.send({message : "Task number cannot be changed" + result});
+            res.send({Error : "Task number cannot be changed" + result});
         }
         else{
             res.send(update);

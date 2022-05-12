@@ -9,12 +9,12 @@ const router = express.Router();
 router.post('/getTodo', (req, res) => {
     model.find((error, result) => {
         if(result.length == 0){
-            res.send("No task available");
+            res.json({Error : "No task available"});
         }
         else{
             model.find().sort({task : 1}).exec((error, result) => {
                 if(error){
-                    res.send({message: error});
+                    res.json({message: error});
                 }
                 else{
                     res.send(result)
@@ -29,7 +29,7 @@ router.post('/getTodo/:task', (req, res) => {
     const taskID = req.params.task;
     model.findOne(({task : taskID}), (error, result) => {
         if(!result){
-            res.json("No such task available!");
+            res.json({Error : "No such task available!"});
         }
         else{
             res.send(result);
