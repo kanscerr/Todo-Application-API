@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 //creating schema for our db
 const schema = new mongoose.Schema({
+    message : String,
     task : Number,
     todo : String
 });
