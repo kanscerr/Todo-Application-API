@@ -1,9 +1,12 @@
 //importing express.js, mongo model
 const express = require('express');
-const { resourceLimits } = require('worker_threads');
 const model = require('../schema');
 const router = express.Router();
 
+//main route
+router.post('/getTodo', (req,res) => {
+    res.sendFile(__dirname, "/get.html");
+})
 
 //route for getting all existing todo
 router.post('/getTodo', (req, res) => {
@@ -17,7 +20,7 @@ router.post('/getTodo', (req, res) => {
                     res.json({message: error});
                 }
                 else{
-                    res.send(result)
+                    res.render('list', {todo : result})
                 }
             });
         }

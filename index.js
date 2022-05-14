@@ -14,10 +14,15 @@ const PORT = 5000;
 
 //middleware for reading from request body
 app.use(bodyparser.json());
+app.use(bodyparser.urlencoded({ extended: true }));
 
 //connecting with routes
-app.use('', homeRoute);
-app.use('/', getTodoRoute)
+app.use('/', homeRoute, (req, res) => {
+    res.sendFile(__dirname + "/public/create.html");
+});
+app.use('/', getTodoRoute, (req, res) => {
+    res.sendFile(__dirname + "/public/get.html");
+})
 
 //listening on port
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

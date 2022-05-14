@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>Document</title>
+    <style>
+        .header{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #0169B2;
+            color: white;
+            text-align: center;
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 3%;
+        }
+        .card{
+            margin: 10%;
+            width: 100%;
+        }
+        .submitBtn{
+            position: absolute;
+            top: 200%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30%;
+            height: 70%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body style="background:#0169B2;">
+    <div class="container">
+        <div class="row">
+            <div class="header"><h4>TODO APPLICATION</h4></div>
+            <div class="card" id="card" style="margin-top: 15%">
+                <div class="card-body">
+                    <form method="post" action="/home">
+                        <label>Enter Todo</label><br>
+                        <input type="checkbox" id="todo">
+                        <label for="todo"></label>
+                        <input type="text" name="task" placeholder="Task" style="width: 10vw;" required>
+                        <input type="text" name="todo" placeholder="Insert Todo here" style="width: 50vw;" required>
+                        <input type="submit" value="Add todo" class="submitBtn">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

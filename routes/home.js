@@ -1,26 +1,30 @@
 //importing express.js, mongo model
 const express = require('express');
-const { resourceLimits } = require('worker_threads');
 const model = require('../schema');
 const router = express.Router();
 
+//main route
+router.post('/home', (req,res) => {
+    res.sendFile(__dirname, "/create.html");
+})
+
 //route for creating new todo
-router.post('/', (req, res) => {
+router.post('/home', (req, res) => {
     const newTask = new model ({
         task : req.body.task,
         todo : req.body.todo
     });
-    if(req.body.task && req.body.todo){
-        newTask.save()
-        res.send(newTask);
-    }
-    else{
-        res.json({Error : "Fields empty!"})
-    }
+    newTask.save(newTask)
+    .then(item => {
+        res.send("Done!");
+    })
+    .catch(err => {
+        res.status(400).send("Unable to save to database");
+    });
 });
 
 //route for deleting a todo
-router.delete('/:task', (req, res) => {
+router.delete('/home/:task', (req, res) => {
     const deleteId = req.params.task;
     model.findOneAndDelete({task : deleteId}, (error, result) => {
         if(!result){
@@ -33,7 +37,7 @@ router.delete('/:task', (req, res) => {
 })
 
 //route for updating any todo
-router.put('/:task', (req, res) => {
+router.put('/home/:task', (req, res) => {
     const taskID = req.params.task;
     model.findOneAndUpdate(
         {task : taskID},

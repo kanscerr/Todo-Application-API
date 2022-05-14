@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .header{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #0169B2;
+            color: white;
+            text-align: center;
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 3%;
+        }
+        .card{
+            margin: 10%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="background:#0169B2;">
+    <div class="container">
+        <div class="row">
+            <div class="header"><h4>GET TODO APPLICATION</h4></div>
+            <form method="get" action="/getTodo">
+                <div class="card" id="card" style="margin-top: 15%">
+                    <div class="card-body">
+                        <input type="text" name="todo" placeholder="Insert Todo here" style="width: 50vw;" required>
+                    </div>
+                </div>     
+            </form>
+        </div>
+    </div>
+</body>
+</html>
