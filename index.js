@@ -16,13 +16,19 @@ const PORT = 5000;
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 
-//connecting with routes
-app.use('/', homeRoute, (req, res) => {
-    res.sendFile(__dirname + "/public/create.html");
-});
-app.use('/', getTodoRoute, (req, res) => {
-    res.sendFile(__dirname + "/public/get.html");
-})
+app.set('view engine', 'ejs');
 
+//connecting with routes
+app.use('/', homeRoute);
+app.get('/', (req, res) => {
+    res.sendFile('/public/create.html', {root : __dirname});
+});
+app.get('/home', (req, res) => {
+    res.sendFile('/public/create.html', {root : __dirname});
+});
+
+app.get('/getTodo', (req, res) => {
+    res.render('get', {todo : result});
+});
 //listening on port
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
